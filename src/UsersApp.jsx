@@ -2,8 +2,7 @@ import { UserForm } from "./components/UserForm";
 import { UsersList } from "./components/UsersList";
 
 const UsersApp = () => {
-    // Arreglo de usuarios
-
+    //<- Arreglo de usuarios -> 
     const initialUsers = [
         {
             id: 1,
@@ -25,7 +24,7 @@ const UsersApp = () => {
                 </div>
 
                 <div className="col">
-                    <UsersList/>
+                    <UsersList users={ initialUsers }/>
                 </div>
             </div>
         </div>
