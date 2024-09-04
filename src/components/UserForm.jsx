@@ -2,7 +2,6 @@ import { useState } from "react"
 
 
 // objeto para cada input inicializado
-
 const initialUserForm =  {
     username: '',
     password: '',
@@ -17,19 +16,33 @@ export const UserForm = () => {
     const { username, password, email } = userForm;
  
     const onInputChange = ({ target }) => {
-        const { name, value } = target;
-
+    
         // actualizamos el estado de cada input
         setUserForm({
-            ...initialUserForm,
-            [name]: value
-        });
+            ...userForm,
+            [target.name]: target.value
+        })
+    }
+
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+        //validamos que nuestros formulario esta completo
+        if (!username.trim() || !password.trim() || !email.trim()) {
+            alert('Complete los campos del formulario');
+            return;
+        }
+
+        //guardar en el estado de la lista de usuaurio el nuevo
+        console.log( userForm );
+        // limpiamos nuestros estado del formulario
+        setUserForm( initialUserForm );
     }
 
     return (
-        <form>
-            <input 
-                type="text" 
+        <form onSubmit={ onSubmit }>
+            <input
                 placeholder="Username" 
                 className="form-control my-3 w-75"
                 name="username"
@@ -38,11 +51,12 @@ export const UserForm = () => {
             />
             <input 
                 type="password"
+                // autoComplete="address-line1 webauthn"
                 placeholder="Password"
                 className="form-control my-3 w-75"
                 name="password"
                 value={ password }
-                onChange={ onInputChange}
+                onChange={ onInputChange }
             />
             <input 
                 type="email" 
