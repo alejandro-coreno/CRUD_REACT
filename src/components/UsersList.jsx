@@ -19,7 +19,8 @@ export const UsersList = ({ users= [] }) => {
                 {
                     users.map( ( { id, username, email }) => (
                         <UserRow 
-                            key={id} 
+                            key={id}
+                            id={id} 
                             username={ username}
                             email={ email }
                         />

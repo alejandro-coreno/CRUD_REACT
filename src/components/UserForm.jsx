@@ -8,7 +8,7 @@ const initialUserForm =  {
     email: ''
 }
 
-export const UserForm = () => {
+export const UserForm = ({ handlerAddUser }) => {
 
     const [userForm, setUserForm] = useState( initialUserForm );
 
@@ -34,8 +34,8 @@ export const UserForm = () => {
             return;
         }
 
-        //guardar en el estado de la lista de usuaurio el nuevo
-        console.log( userForm );
+       // guardar el nuevo usuario en el estado de la lista de usuarios
+        handlerAddUser( userForm );
         // limpiamos nuestros estado del formulario
         setUserForm( initialUserForm );
     }

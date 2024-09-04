@@ -1,16 +1,42 @@
+import { useReducer, useState } from "react";
 import { UserForm } from "./components/UserForm";
 import { UsersList } from "./components/UsersList";
+import { usersReducer } from "./reducers/usersReducer";
+
+//<- Arreglo de usuarios -> 
+const initialUsers = [
+    {
+        id: 1,
+        username: 'Alejandro',
+        password: '12345',
+        email: 'correo@correo.com'
+    }
+];
 
 const UsersApp = () => {
-    //<- Arreglo de usuarios -> 
-    const initialUsers = [
-        {
-            id: 1,
-            username: 'Alejandro',
-            password: '12345',
-            email: 'correo@correo.com'
-        }
-    ]
+
+    // manejamos el estado de la lista de usuarios con el useReducer
+    const [users, dispatch] = useReducer(usersReducer, initialUsers);
+
+    const [id, setId] = useState(2);
+
+    //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
+    const handlerAddUser = ( user ) => {
+        //actualizamos el id para cada usuario
+        setId( id + 1);
+
+        // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
+        // pasamos un nuevo objeto con el tipo de accion y el nuevo usuario
+        dispatch(
+            { type: 'addUser', payload: user, id }
+        )
+    }
+
+    // funcion para eliminar un usuario
+
+    const handlerRemoveUser = (id) => {
+
+    }
 
     return (
         <div className="container my-4">
@@ -20,11 +46,11 @@ const UsersApp = () => {
             <div className="row">
 
                 <div className="col">
-                    <UserForm />
+                    <UserForm  handlerAddUser={ handlerAddUser } />
                 </div>
 
                 <div className="col">
-                    <UsersList users={ initialUsers }/>
+                    <UsersList users={ users }/>
                 </div>
             </div>
         </div>
