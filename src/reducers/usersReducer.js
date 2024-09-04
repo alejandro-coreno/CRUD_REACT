@@ -7,9 +7,6 @@ export const usersReducer = (state = [], action) => {
     // Modificara el estado dependiendo de la accion
     switch ( action.type ) {
         case 'addUser':
-
-        
-
             // guardamos los usuarios anteriores y agregamos uno nuevo
             return [
                 ...state,
@@ -18,7 +15,10 @@ export const usersReducer = (state = [], action) => {
                     id: action.id
                 }
             ];
-    
+        case 'removeUser':
+            
+            return  state.filter( user => user.id !== action.payload);
+        
         default:
             return state;
     }

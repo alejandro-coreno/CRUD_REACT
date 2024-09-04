@@ -5,12 +5,12 @@ import { usersReducer } from "./reducers/usersReducer";
 
 //<- Arreglo de usuarios -> 
 const initialUsers = [
-    {
-        id: 1,
-        username: 'Alejandro',
-        password: '12345',
-        email: 'correo@correo.com'
-    }
+    // {
+    //     id: 1,
+    //     username: 'Alejandro',
+    //     password: '12345',
+    //     email: 'correo@correo.com'
+    // }
 ];
 
 const UsersApp = () => {
@@ -18,7 +18,7 @@ const UsersApp = () => {
     // manejamos el estado de la lista de usuarios con el useReducer
     const [users, dispatch] = useReducer(usersReducer, initialUsers);
 
-    const [id, setId] = useState(2);
+    const [ id, setId ] = useState(0);
 
     //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
     const handlerAddUser = ( user ) => {
@@ -35,7 +35,11 @@ const UsersApp = () => {
     // funcion para eliminar un usuario
 
     const handlerRemoveUser = (id) => {
-
+        // despachamos para actualizar el estado de la lista de usuarios al eliminarlo
+        dispatch(
+            {type: 'removeUser', payload: id}
+        )
+       
     }
 
     return (
@@ -50,7 +54,7 @@ const UsersApp = () => {
                 </div>
 
                 <div className="col">
-                    <UsersList users={ users }/>
+                    <UsersList users={ users } handlerRemoveUser={ handlerRemoveUser }/>
                 </div>
             </div>
         </div>
