@@ -5,7 +5,7 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
     const [userForm, setUserForm] = useState( initialUserForm );
 
     // desestructuramos nuestros valores iniciales del estado del formulario
-    const { username, password, email } = userForm;
+    const { id, username, password, email } = userForm;
  
     const onInputChange = ({ target }) => {
     
@@ -28,7 +28,8 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
        // guardar el nuevo usuario en el estado de la lista de usuarios;
         handlerAddUser( userForm );
-        // limpiamos nuestros estado del formulario;
+
+        // limpiamos nuestros estado del formulario al estado inicial;
         setUserForm( initialUserForm );
     }
 
@@ -65,7 +66,22 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
                 onChange={ onInputChange }
             />
 
-            <button type="submit" className="btn btn-primary">Crear</button>
+            <input type="hidden" name="id" value={id} />
+
+            <button type="submit" className="btn btn-primary">{ id > 0 ? 'Editar Usuario' :  'Crear Usuario'}</button>
+
+            {/* Boton para cerrar formulario de editar */}
+
+            { 
+                id > 0 &&
+                <button 
+                    type="button" 
+                    className="btn btn-warning text-white mx-2"
+                    onClick={ () => setUserForm( initialUserForm ) }
+                >
+                    Cerrar
+                </button>
+            }
         </form>
     );
 }

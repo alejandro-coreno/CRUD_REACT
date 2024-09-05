@@ -5,16 +5,17 @@ import { usersReducer } from "./reducers/usersReducer";
 
 //<- Arreglo de usuarios -> 
 const initialUsers = [
-    // {
-    //     id: 1,
-    //     username: 'Alejandro',
-    //     password: '12345',
-    //     email: 'correo@correo.com'
-    // }
+    {
+        id: 1,
+        username: 'Alejandro',
+        password: '12345',
+        email: 'correo@correo.com'
+    }
 ];
 
 // objeto para cada input inicializado
 const initialUserForm =  {
+    id: 0,
     username: '',
     password: '',
     email: ''
@@ -23,23 +24,32 @@ const initialUserForm =  {
 const UsersApp = () => {
 
     // manejamos el estado de la lista de usuarios con el useReducer
-    const [users, dispatch] = useReducer(usersReducer, initialUsers);
+    const [users, dispatch] = useReducer( usersReducer, initialUsers );
 
     // estado para actualizar los valores de cada usuario
     const [userSelected, setUserSelected] = useState(initialUserForm);
 
-    const [ id, setId ] = useState(1);
-
     //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
     const handlerAddUser = ( user ) => {
-        //actualizamos el id para cada usuario
-        setId( id + 1);
+        
+        // validamos si no esta el usuario, y dependiendo de la accion cambiara el estado
 
-        // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
-        // pasamos un nuevo objeto con el tipo de accion y el nuevo usuario
+        let type;
+
+        if (user.id === 0) {
+
+            type = 'addUser'
+            // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
+            // pasamos un nuevo objeto con el tipo de accion y el nuevo usuari
+        }
+
+        else {
+            type = 'updateUser'
+            
+        }
         dispatch({ 
-            type: 'addUser', 
-            payload: user, id 
+            type, 
+            payload: user
         });
     }
 
