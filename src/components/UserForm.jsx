@@ -1,14 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 
-
-// objeto para cada input inicializado
-const initialUserForm =  {
-    username: '',
-    password: '',
-    email: ''
-}
-
-export const UserForm = ({ handlerAddUser }) => {
+export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
     const [userForm, setUserForm] = useState( initialUserForm );
 
@@ -21,7 +13,7 @@ export const UserForm = ({ handlerAddUser }) => {
         setUserForm({
             ...userForm,
             [target.name]: target.value
-        })
+        });
     }
 
 
@@ -34,11 +26,17 @@ export const UserForm = ({ handlerAddUser }) => {
             return;
         }
 
-       // guardar el nuevo usuario en el estado de la lista de usuarios
+       // guardar el nuevo usuario en el estado de la lista de usuarios;
         handlerAddUser( userForm );
-        // limpiamos nuestros estado del formulario
+        // limpiamos nuestros estado del formulario;
         setUserForm( initialUserForm );
     }
+
+
+    //actualiza el estado del formulario cada que le un click en el boton del update
+    useEffect(() => {
+        setUserForm({... userSelected});
+    }, [userSelected])
 
     return (
         <form onSubmit={ onSubmit }>
@@ -69,5 +67,5 @@ export const UserForm = ({ handlerAddUser }) => {
 
             <button type="submit" className="btn btn-primary">Crear</button>
         </form>
-    )
+    );
 }

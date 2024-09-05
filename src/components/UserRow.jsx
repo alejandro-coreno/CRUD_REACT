@@ -1,14 +1,6 @@
 
 
-
-export const UserRow = ({ id, username, email, handlerRemoveUser }) => {
-
-    // funcion para eliminar
-    const onRemoveUser = ( id ) => {
-        // pasamos el id para eliminar el usuario
-        handlerRemoveUser(id)
-    }
-
+export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSelectedForm, password }) => {
     return (
         <tr>
             <td>{id}</td>
@@ -16,6 +8,8 @@ export const UserRow = ({ id, username, email, handlerRemoveUser }) => {
             <td>{email}</td>
             <td>
                 <button 
+                    // pasamos el objeto con cada valor para actulizar el usuario
+                    onClick={() => handlerUserSelectedForm({id, username, email, password})}
                     className="btn btn-secondary btn-sm" 
                     type="button"
                     >
@@ -25,7 +19,7 @@ export const UserRow = ({ id, username, email, handlerRemoveUser }) => {
 
             <td>
                 <button 
-                    onClick={ ()  => onRemoveUser(id) } 
+                    onClick={ ()  => handlerRemoveUser(id) } 
                     className="btn btn-danger btn-sm" 
                     type="button"
                     >

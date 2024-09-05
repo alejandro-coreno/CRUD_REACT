@@ -13,12 +13,22 @@ const initialUsers = [
     // }
 ];
 
+// objeto para cada input inicializado
+const initialUserForm =  {
+    username: '',
+    password: '',
+    email: ''
+}
+
 const UsersApp = () => {
 
     // manejamos el estado de la lista de usuarios con el useReducer
     const [users, dispatch] = useReducer(usersReducer, initialUsers);
 
-    const [ id, setId ] = useState(0);
+    // estado para actualizar los valores de cada usuario
+    const [userSelected, setUserSelected] = useState(initialUserForm);
+
+    const [ id, setId ] = useState(1);
 
     //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
     const handlerAddUser = ( user ) => {
@@ -27,19 +37,25 @@ const UsersApp = () => {
 
         // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
         // pasamos un nuevo objeto con el tipo de accion y el nuevo usuario
-        dispatch(
-            { type: 'addUser', payload: user, id }
-        )
+        dispatch({ 
+            type: 'addUser', 
+            payload: user, id 
+        });
     }
 
     // funcion para eliminar un usuario
-
     const handlerRemoveUser = (id) => {
         // despachamos para actualizar el estado de la lista de usuarios al eliminarlo
-        dispatch(
-            {type: 'removeUser', payload: id}
-        )
-       
+        dispatch({
+            type: 'removeUser', 
+            payload: id
+        });
+    }
+
+    // funcion para actualizar un usuario
+    const handlerUserSelectedForm = ( user ) => {
+        // realizamos un clon de la instancia user para guardarloe en nuestro state
+        setUserSelected({...user});
     }
 
     return (
@@ -50,11 +66,19 @@ const UsersApp = () => {
             <div className="row">
 
                 <div className="col">
-                    <UserForm  handlerAddUser={ handlerAddUser } />
+                    <UserForm
+                        userSelected={ userSelected }  
+                        handlerAddUser={ handlerAddUser }
+                        initialUserForm={ initialUserForm } 
+                    />
                 </div>
 
                 <div className="col">
-                    <UsersList users={ users } handlerRemoveUser={ handlerRemoveUser }/>
+                    <UsersList 
+                        users={ users } 
+                        handlerRemoveUser={ handlerRemoveUser }
+                        handlerUserSelectedForm={ handlerUserSelectedForm }
+                    />
                 </div>
             </div>
         </div>
