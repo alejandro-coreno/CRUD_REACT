@@ -29,35 +29,29 @@ export const useUsers = () => {
     // estado para actualizar los valores de cada usuario
     const [userSelected, setUserSelected] = useState(initialUserForm);
 
-     //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
-     const handlerAddUser = ( user ) => {
-        
-        // validamos si no esta el usuario, y dependiendo de la accion cambiara el estado
+    // estado para el ser visible el formulario
 
-        let type;
+    const [visibleForm, setVisibleForm] = useState(false);
 
-        if (user.id === 0) {
+    //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
+    const handlerAddUser = ( user ) => {
 
-            type = 'addUser'
-            // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
-            // pasamos un nuevo objeto con el tipo de accion y el nuevo usuari
-        }
-
-        else {
-            type = 'updateUser'
-            
-        }
+        // con el dispatch, servimos al funcion reductora el cual modificara el estado dependiendo de la accion;
+        // pasamos un nuevo objeto con el tipo de accion y el nuevo usuario
         dispatch({ 
-            type, 
+            // validamos si no esta el usuario, y dependiendo de la accion cambiara el estado
+            type: (user.id === 0) ? 'addUser' : 'updateUser', 
             payload: user
         });
 
         //alerta de exito
         Swal.fire({
-            title: (user.id === 0) ? "Usuario Creado" : "Usuario Actulizado",
+            title: (user.id === 0) ? "Usuario Creado" : "Usuario Actualizado",
             text: (user.id === 0) ? "¡El usuario ha sido creado con exito!" : "¡El usuario ha sido actualizado con exito!",
             icon: "success"
         });
+
+        handlerCloseForm();
     }
 
     // funcion para eliminar un usuario
@@ -93,6 +87,18 @@ export const useUsers = () => {
     const handlerUserSelectedForm = ( user ) => {
         // realizamos un clon de la instancia user para guardarloe en nuestro state
         setUserSelected({...user});
+        setVisibleForm( !visibleForm );
+    }
+
+    // funcion para abrir el formulario
+
+    const handlerOpenForm = () => {
+        setVisibleForm( !visibleForm );
+    }
+
+    const handlerCloseForm = () => {
+        setVisibleForm(!visibleForm);
+        setUserSelected(initialUserForm);
     }
  
     // retornamos nuestros metodos o atributos del hook para ser desectructurados
@@ -100,9 +106,12 @@ export const useUsers = () => {
         users,
         userSelected,
         initialUserForm,
+        visibleForm,
         
         handlerAddUser,
         handlerRemoveUser,
-        handlerUserSelectedForm
+        handlerUserSelectedForm,
+        handlerOpenForm,
+        handlerCloseForm
     }
 }

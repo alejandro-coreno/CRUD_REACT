@@ -10,26 +10,49 @@ const UsersApp = () => {
         userSelected, 
         initialUserForm, 
         handlerAddUser, 
+        visibleForm,
+
         handlerRemoveUser, 
-        handlerUserSelectedForm} 
-    = useUsers();
+        handlerUserSelectedForm,
+        handlerOpenForm,
+        handlerCloseForm
+    } = useUsers();
     
     return (
         <div className="container my-4">
             <h1>User App</h1>
 
             {/* Una fila para los dos componentes */}
-            <div className="row">
+            <div className="row">                
+                {/* Si es verdadero muestra el formulario */}
+                {
+                    visibleForm && 
+                    <div className="col">
+                        <UserForm
+                            userSelected={ userSelected }  
+                            handlerAddUser={ handlerAddUser }
+                            initialUserForm={ initialUserForm }
+                            handlerCloseForm={ handlerCloseForm } 
+                        />
+
+                    </div>
+                }
+              
 
                 <div className="col">
-                    <UserForm
-                        userSelected={ userSelected }  
-                        handlerAddUser={ handlerAddUser }
-                        initialUserForm={ initialUserForm } 
-                    />
-                </div>
 
-                <div className="col">
+                    {
+                        visibleForm || 
+                        <button 
+                            type="button" 
+                            className="btn btn-primary my-2"
+                            // funcion para abrir el formulario
+                            onClick={ handlerOpenForm }
+                        >
+                            Nuevo Usuario
+                        </button>
+                    }
+
                     <UsersList 
                         users={ users } 
                         handlerRemoveUser={ handlerRemoveUser }

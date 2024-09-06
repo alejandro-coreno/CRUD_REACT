@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
+export const UserForm = ({ handlerCloseForm, handlerAddUser, initialUserForm, userSelected }) => {
 
     const [userForm, setUserForm] = useState( initialUserForm );
 
@@ -36,6 +36,11 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
         // limpiamos nuestros estado del formulario al estado inicial;
         setUserForm( initialUserForm );
+    }
+
+    const onCloseForm = () => {
+        handlerCloseForm();
+        setUserForm(initialUserForm );
     }
 
 
@@ -84,7 +89,7 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
             {/* Boton para cerrar formulario de editar */}
 
-            { 
+            {/* { 
                 id > 0 &&
                 <button 
                     type="button" 
@@ -93,7 +98,15 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
                 >
                     Cerrar
                 </button>
-            }
+            } */}
+
+            <button 
+                type="button" 
+                className="btn btn-warning mx-2"
+                onClick={ onCloseForm }
+            >
+                Cerrar
+            </button>
         </form>
     );
 }
