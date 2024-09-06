@@ -1,6 +1,6 @@
 
 
-export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSelectedForm, password }) => {
+export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSelectedForm }) => {
     return (
         <tr>
             <td>{id}</td>
@@ -9,7 +9,7 @@ export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSel
             <td>
                 <button 
                     // pasamos el objeto con cada valor para actulizar el usuario
-                    onClick={() => handlerUserSelectedForm({id, username, email, password})}
+                    onClick={() => handlerUserSelectedForm({id, username, email})}
                     className="btn btn-secondary btn-sm" 
                     type="button"
                     >
@@ -29,3 +29,4 @@ export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSel
         </tr>
     )
 }
+

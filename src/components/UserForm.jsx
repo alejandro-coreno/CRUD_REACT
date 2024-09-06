@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
@@ -21,8 +22,12 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
         event.preventDefault();
 
         //validamos que nuestros formulario esta completo
-        if (!username.trim() || !password.trim() || !email.trim()) {
-            alert('Complete los campos del formulario');
+        if (!username.trim() || (!password && id === 0) || !email.trim()) {
+            Swal.fire({
+                title: "Error de validación",
+                text: "Completa los campos del formulario",
+                icon: "error"
+            });
             return;
         }
 
@@ -36,7 +41,11 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
 
     //actualiza el estado del formulario cada que le un click en el boton del update
     useEffect(() => {
-        setUserForm({... userSelected});
+        setUserForm({
+            ... userSelected,
+            password: ''
+
+        });
     }, [userSelected])
 
     return (
@@ -48,15 +57,18 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected }) => {
                 value={ username }
                 onChange={ onInputChange }
             />
-            <input 
-                type="password"
-                // autoComplete="address-line1 webauthn"
-                placeholder="Password"
-                className="form-control my-3 w-75"
-                name="password"
-                value={ password }
-                onChange={ onInputChange }
-            />
+            {/* Si el se quiere agregar un  nuevo usuario lo muestra el input password*/}
+            { id > 0  || 
+                <input 
+                    type="password"
+                    // autoComplete="address-line1 webauthn"
+                    placeholder="Password"
+                    className="form-control my-3 w-75"
+                    name="password"
+                    value={ password }
+                    onChange={ onInputChange }
+                />
+            }
             <input 
                 type="email" 
                 placeholder="Email"
