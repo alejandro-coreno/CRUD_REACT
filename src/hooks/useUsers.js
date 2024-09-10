@@ -91,7 +91,6 @@ export const useUsers = () => {
     }
 
     // funcion para abrir el formulario
-
     const handlerOpenForm = () => {
         setVisibleForm( !visibleForm );
     }
@@ -101,7 +100,7 @@ export const useUsers = () => {
         setUserSelected(initialUserForm);
     }
  
-    // retornamos nuestros metodos o atributos del hook para ser desectructurados
+    // retornamos nuestros metodos y atributos del hook para ser desectructurados
     return {
         users,
         userSelected,

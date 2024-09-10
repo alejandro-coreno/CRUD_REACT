@@ -1,6 +1,7 @@
-import { UserForm } from "./components/UserForm";
 import { UsersList } from "./components/UsersList";
 import { useUsers } from "./hooks/useUsers";
+import { UserModalForm } from "./components/UserModalForm";
+import { LoginPage } from "./auth/pages/loginPage";
 
 const UsersApp = () => {
 
@@ -20,29 +21,19 @@ const UsersApp = () => {
     
     return (
         <>
+            {/* <LoginPage /> */}
             {
                 !visibleForm || 
-                // modal para formulario con bootstrap
-                <div className="abrir-modal animacion fadeIn">
-                    <div className="modal" style={{display: 'block'}}  tabIndex="-1">
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title">{ userSelected.id > 0 ? 'Editar' : 'Crear'}</h5>
-                                </div>
-                                <div className="modal-body">
-                                    <UserForm
-                                        userSelected={ userSelected }  
-                                        handlerAddUser={ handlerAddUser }
-                                        initialUserForm={ initialUserForm }
-                                        handlerCloseForm={ handlerCloseForm } 
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <UserModalForm 
+                    userSelected={userSelected}
+                    initialUserForm={ initialUserForm }
+                    handlerAddUser={ handlerAddUser }
+                    handlerCloseForm={handlerCloseForm}
+                />
             }
+
+            {/* Tabla de lista de usuarios */}
             <div className="container my-4">
                 <h1>User App</h1>
 
@@ -50,7 +41,6 @@ const UsersApp = () => {
                 <div className="row">                
                    
                     <div className="col">
-
                         {
                             visibleForm || 
                             <button 
