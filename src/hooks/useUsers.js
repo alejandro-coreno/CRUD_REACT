@@ -2,6 +2,7 @@
 import { useState, useReducer } from "react";
 import { usersReducer } from "../reducers/usersReducer";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 //<- Arreglo de usuarios -> 
 const initialUsers = [
     {
@@ -30,8 +31,9 @@ export const useUsers = () => {
     const [userSelected, setUserSelected] = useState(initialUserForm);
 
     // estado para el ser visible el formulario
-
     const [visibleForm, setVisibleForm] = useState(false);
+
+    const navigate = useNavigate();
 
     //funcion para agregar un nuevo usuario a la lista, se recibe el user del form
     const handlerAddUser = ( user ) => {
@@ -52,6 +54,9 @@ export const useUsers = () => {
         });
 
         handlerCloseForm();
+
+        // redirigimos al usuario a la ruta /users cada que se agrgegue un usuario
+        navigate('/users');
     }
 
     // funcion para eliminar un usuario

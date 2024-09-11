@@ -1,7 +1,7 @@
+import { Routes, Route, Navigate } from "react-router-dom";
 import { LoginPage } from "./auth/pages/LoginPage";
-import { Navbar } from "./components/layout/Navbar";
 import { useAuth } from "./auth/hooks/useAuth";
-import UsersPage  from "./pages/UsersPage";
+import { UserRoutes } from "./routes/UserRoutes";
 
 
 
@@ -12,18 +12,20 @@ export const UsersApp = () => {
     const {login, handlerLogout, handlerLogin} = useAuth();
 
     return (
-        <>
+        <Routes>
             
             {/* Validamos si esta logeado el usuario y renderizamos la vista */}
             {
                 login.isAuth 
-                ?   <>
-                        <Navbar login={login} handlerLogout={handlerLogout} />
-                        <UsersPage />
-                    </>
+                ?  
+                    <Route path="/*" element={ <UserRoutes login={login} handlerLogout={handlerLogout} /> } />
                 :
-                    <LoginPage handlerLogin={handlerLogin} />
+                    <>
+                        <Route path="/login" element={ <LoginPage handlerLogin={handlerLogin} /> } />
+                        <Route path="/*" element={ <Navigate to="/login" />} />
+                    </>
+                    
             }
-        </>
+        </Routes>
     );
 }

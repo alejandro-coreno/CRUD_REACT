@@ -1,7 +1,8 @@
 import { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import {loginReducer} from "../reducers/loginReducer";
-import Swal from "sweetalert2";
 import { loginUser } from "../services/authService";
+import Swal from "sweetalert2";
 
 // custom hook para separar la logica del login
 
@@ -16,6 +17,8 @@ const initialLogin =  JSON.parse(sessionStorage.getItem('login')) || {
 export const useAuth = () => {
     //manejamos el estado del login con el useReducer
     const [login, dispatch] = useReducer(loginReducer, initialLogin );
+
+    const navigate = useNavigate();
 
     // funcion para iniciar login
     const handlerLogin = ({ username, password}) => {
@@ -39,6 +42,7 @@ export const useAuth = () => {
                 isAuth: true,
                 user
             }));
+            navigate('/users');
         }
         else {
             Swal.fire({
