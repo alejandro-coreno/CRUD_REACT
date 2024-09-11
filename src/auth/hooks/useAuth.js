@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import {loginReducer} from "../reducers/loginReducer";
 import Swal from "sweetalert2";
+import { loginUser } from "../services/authService";
 
 // custom hook para separar la logica del login
 
@@ -18,9 +19,13 @@ export const useAuth = () => {
 
     // funcion para iniciar login
     const handlerLogin = ({ username, password}) => {
-        
+
+        // guardamos el valor de retorno de nuestro authService para el login
+        const isLogin = loginUser({ username, password });
+
         //implementamos un login
-        if (username === 'admin' && password === '1234') {
+        // si es true avanzamos a modificar el estado del login
+        if (isLogin) {
             // handlerLogin
             // despachamos el estado en login en isAuth true
             const user = {username: 'admin'};
