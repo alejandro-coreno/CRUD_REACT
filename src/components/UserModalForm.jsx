@@ -1,8 +1,8 @@
-import {UserForm} from "./UserForm";
+import { UserForm } from "./UserForm";
 
 
 // componente modal para el formulario
-export const UserModalForm = ({ userSelected, initialUserForm, handlerAddUser, handlerCloseForm}) => {
+export const UserModalForm = ({ userSelected, initialUserForm, handlerAddUser, handlerCloseForm }) => {
     return (
         // modal para formulario con bootstrap
         <div className="abrir-modal animacion fadeIn">

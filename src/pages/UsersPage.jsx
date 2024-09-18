@@ -1,22 +1,20 @@
 import { UsersList } from "../components/UsersList";
-import { useUsers } from "../hooks/useUsers";
 import { UserModalForm } from "../components/UserModalForm";
 
-const UsersPage = () => {
+const UsersPage = ({ 
+    users,
+    userSelected, 
+    initialUserForm, 
+    handlerAddUser, 
+    visibleForm,
 
-    // obtenemos nuestros metodos y atributos del custom hook
-    const { 
-        users,
-        userSelected, 
-        initialUserForm, 
-        handlerAddUser, 
-        visibleForm,
+    handlerRemoveUser, 
+    handlerUserSelectedForm,
+    handlerOpenForm,
+    handlerCloseForm
+}) => {
 
-        handlerRemoveUser, 
-        handlerUserSelectedForm,
-        handlerOpenForm,
-        handlerCloseForm
-    } = useUsers();
+   
     
     return (
         <>

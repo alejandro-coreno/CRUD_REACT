@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 // custom hook para separar la logica del login
 
-
 // datos iniciales del estado del login
 // preguntamos si existe data en el session storage, si no existe manda por defecto los valores del objeto
 const initialLogin =  JSON.parse(sessionStorage.getItem('login')) || {
@@ -42,6 +41,8 @@ export const useAuth = () => {
                 isAuth: true,
                 user
             }));
+
+            // redirecciona al la vista users
             navigate('/users');
         }
         else {

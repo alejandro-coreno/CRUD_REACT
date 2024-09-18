@@ -28,7 +28,7 @@ export const useUsers = () => {
     const [users, dispatch] = useReducer( usersReducer, initialUsers );
 
     // estado para actualizar los valores de cada usuario
-    const [userSelected, setUserSelected] = useState(initialUserForm);
+    const [userSelected, setUserSelected] = useState( initialUserForm );
 
     // estado para el ser visible el formulario
     const [visibleForm, setVisibleForm] = useState(false);
@@ -91,7 +91,7 @@ export const useUsers = () => {
     // funcion para actualizar un usuario
     const handlerUserSelectedForm = ( user ) => {
         // realizamos un clon de la instancia user para guardarloe en nuestro state
-        setUserSelected({...user});
+        setUserSelected({ ...user });
         setVisibleForm( !visibleForm );
     }
 

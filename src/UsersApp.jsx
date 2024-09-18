@@ -9,7 +9,7 @@ import { UserRoutes } from "./routes/UserRoutes";
 export const UsersApp = () => {
 
     // desestructuramos nuestros atributos y metodos del custom hook
-    const {login, handlerLogout, handlerLogin} = useAuth();
+    const { login, handlerLogout, handlerLogin} = useAuth();
 
     return (
         <Routes>
@@ -23,8 +23,7 @@ export const UsersApp = () => {
                     <>
                         <Route path="/login" element={ <LoginPage handlerLogin={handlerLogin} /> } />
                         <Route path="/*" element={ <Navigate to="/login" />} />
-                    </>
-                    
+                    </> 
             }
         </Routes>
     );

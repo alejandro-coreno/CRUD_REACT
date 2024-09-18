@@ -9,7 +9,6 @@ export const UserForm = ({ handlerCloseForm, handlerAddUser, initialUserForm, us
     const { id, username, password, email } = userForm;
  
     const onInputChange = ({ target }) => {
-    
         // actualizamos el estado de cada input
         setUserForm({
             ...userForm,
@@ -87,26 +86,17 @@ export const UserForm = ({ handlerCloseForm, handlerAddUser, initialUserForm, us
 
             <button type="submit" className="btn btn-primary">{ id > 0 ? 'Editar Usuario' :  'Crear Usuario'}</button>
 
-            {/* Boton para cerrar formulario de editar */}
-
-            {/* { 
-                id > 0 &&
+            {
+                !handlerCloseForm || 
                 <button 
                     type="button" 
-                    className="btn btn-warning text-white mx-2"
-                    onClick={ () => setUserForm( initialUserForm ) }
+                    className="btn btn-warning mx-2"
+                    onClick={ onCloseForm }
                 >
-                    Cerrar
-                </button>
-            } */}
-
-            <button 
-                type="button" 
-                className="btn btn-warning mx-2"
-                onClick={ onCloseForm }
-            >
                 Cerrar
-            </button>
+                </button>
+            }
+            
         </form>
     );
 }
