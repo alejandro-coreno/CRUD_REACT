@@ -4,8 +4,6 @@ import { useAuth } from "./auth/hooks/useAuth";
 import { UserRoutes } from "./routes/UserRoutes";
 
 
-
-
 export const UsersApp = () => {
 
     // desestructuramos nuestros atributos y metodos del custom hook

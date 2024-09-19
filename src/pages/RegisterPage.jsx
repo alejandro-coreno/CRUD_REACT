@@ -12,13 +12,17 @@ export const RegisterPage = ({ users = [],  handlerAddUser, initialUserForm,}) =
     const { id } = useParams();
 
     useEffect(() => {
-        const user = users.find( u => u.id == id) || initialUserForm;
-        setUserSelected( user );
+        // si existe el id que busque en la lista de usuarios y setie el estado del formulario con los datos del ID
+        if ( id ) {
+            const user = users.find( u => u.id == id) || initialUserForm;
+            setUserSelected( user );
+        }
+
     }, [id])
     
     return (
         <div className="container my-4">
-            <h4>Registro de Usuarios</h4>
+            <h4>{ id ? 'Editar' : 'Registrar'} Usuario</h4>
 
             <div className="row">
                 <div className="col">

@@ -30,13 +30,21 @@ export const UserForm = ({ handlerCloseForm, handlerAddUser, initialUserForm, us
             return;
         }
 
+        // validamos el correo que tenga un @
+        if ( !email.includes('@')) {
+            Swal.fire({
+                title: "Error de validación Email",
+                text: "El Email debe ser valido",
+                icon: "error"
+            });
+            return;
+        }
+
        // guardar el nuevo usuario en el estado de la lista de usuarios;
         handlerAddUser( userForm );
 
         // limpiamos nuestros estado del formulario al estado inicial;
         setUserForm( initialUserForm );
-
-        
 
     }
 

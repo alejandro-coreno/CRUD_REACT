@@ -40,7 +40,7 @@ export const UserRoutes = ({login, handlerLogout}) => {
                 <Route path="/users/register" element={
                     <RegisterPage  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
 
-                {/* Dependiendo de cual sea el id sera dinamico para editar */}
+                {/* Dependiendo de cual sea el id dinamico , se editara */}
                 <Route path="/users/edit/:id" element={
                     <RegisterPage users={users}  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
 
