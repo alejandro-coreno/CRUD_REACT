@@ -101,7 +101,7 @@ export const useUsers = () => {
     }
 
     const handlerCloseForm = () => {
-        setVisibleForm(!visibleForm);
+        setVisibleForm( false );
         setUserSelected(initialUserForm);
     }
  

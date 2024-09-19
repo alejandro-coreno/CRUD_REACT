@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar} from "../components/layout/Navbar";
-import { RegisterPage } from "../pages/RegisterPage";
+import { RegisterPage} from "../pages/RegisterPage";
 import { useUsers } from "../hooks/useUsers";
 import UsersPage from "../pages/UsersPage";
 
@@ -39,6 +39,10 @@ export const UserRoutes = ({login, handlerLogout}) => {
                 />
                 <Route path="/users/register" element={
                     <RegisterPage  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
+
+                {/* Dependiendo de cual sea el id sera dinamico para editar */}
+                <Route path="/users/edit/:id" element={
+                    <RegisterPage users={users}  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
 
                 <Route path="/" element={ <Navigate to="/users" />} />
             </Routes>
