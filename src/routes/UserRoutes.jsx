@@ -15,23 +15,12 @@ export const UserRoutes = ({login, handlerLogout}) => {
                 <Navbar login={login} handlerLogout={handlerLogout} />
 
                 <Routes>
-                    <Route path="users" element={ <UsersPage 
-                        users={users}
-                        initialUserForm={initialUserForm}
-                        visibleForm={visibleForm}
-                        handlerAddUser={handlerAddUser}
-                        handlerRemoveUser={handlerRemoveUser}
-                        handlerUserSelectedForm={handlerUserSelectedForm}
-                        handlerOpenForm={handlerOpenForm}
-                        handlerCloseForm={handlerCloseForm}
-                        userSelected={userSelected} />}
-                    />
-                    <Route path="/users/register" element={
-                        <RegisterPage  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
+                    <Route path="users" element={ <UsersPage /> }/>
+                    
+                    <Route path="/users/register" element={ <RegisterPage /> }/>
 
                     {/* Dependiendo de cual sea el id dinamico , se editara */}
-                    <Route path="/users/edit/:id" element={
-                        <RegisterPage users={users}  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
+                    <Route path="/users/edit/:id" element={ <RegisterPage /> }/>
 
                     <Route path="/" element={ <Navigate to="/users" />} />
                 </Routes>

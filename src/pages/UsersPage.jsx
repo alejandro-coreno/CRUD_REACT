@@ -1,21 +1,17 @@
+import { useContext } from "react";
 import { UsersList } from "../components/UsersList";
 import { UserModalForm } from "../components/UserModalForm";
-import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
-const UsersPage = ({ 
-    users,
-    userSelected, 
-    initialUserForm, 
-    handlerAddUser, 
-    visibleForm,
+const UsersPage = () => {
 
-    handlerRemoveUser, 
-    handlerUserSelectedForm,
-    handlerOpenForm,
-    handlerCloseForm
-}) => {
-
-   const {} = useContext();
+   const { 
+        users,
+        visibleForm,
+        handlerRemoveUser, 
+        handlerUserSelectedForm,
+        handlerOpenForm,
+    } = useContext(UserContext);
     
     return (
         <>
@@ -23,12 +19,7 @@ const UsersPage = ({
             {
                 !visibleForm || 
 
-                <UserModalForm 
-                    userSelected={userSelected}
-                    initialUserForm={ initialUserForm }
-                    handlerAddUser={ handlerAddUser }
-                    handlerCloseForm={handlerCloseForm}
-                />
+                <UserModalForm />
             }
 
             {/* Tabla de lista de usuarios */}

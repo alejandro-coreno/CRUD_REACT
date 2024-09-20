@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserForm } from "../components/UserForm"
+import { UserContext } from "../context/UserContext";
 
-export const RegisterPage = ({ users = [],  handlerAddUser, initialUserForm,}) => {
+export const RegisterPage = () => {
+
+    // obtenemos la informacion mediante el hook useContext para los usuarios
+    const { users = [], initialUserForm } = useContext(UserContext)
 
     // inicializamos los valores del useState para editar los datos 
     const [ userSelected, setUserSelected] = useState( initialUserForm );
@@ -27,11 +31,7 @@ export const RegisterPage = ({ users = [],  handlerAddUser, initialUserForm,}) =
             <div className="row">
                 <div className="col">
                     {/* Componente UserForm */}
-                    <UserForm 
-                        handlerAddUser={handlerAddUser} 
-                        initialUserForm={ initialUserForm }
-                        userSelected={userSelected}
-                    />
+                    <UserForm userSelected={userSelected} />
                 </div>
             </div>
             

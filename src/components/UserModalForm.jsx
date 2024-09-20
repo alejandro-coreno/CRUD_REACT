@@ -1,8 +1,14 @@
+import { useContext } from "react";
 import { UserForm } from "./UserForm";
+import { UserContext } from "../context/UserContext";
 
 
 // componente modal para el formulario
-export const UserModalForm = ({ userSelected, initialUserForm, handlerAddUser, handlerCloseForm }) => {
+export const UserModalForm = ({  }) => {
+
+    // obtenemos la info del contexto
+    const { userSelected , handlerCloseForm } = useContext(UserContext);
+
     return (
         // modal para formulario con bootstrap
         <div className="abrir-modal animacion fadeIn">
@@ -15,8 +21,6 @@ export const UserModalForm = ({ userSelected, initialUserForm, handlerAddUser, h
                         <div className="modal-body">
                             <UserForm
                                 userSelected={ userSelected }  
-                                handlerAddUser={ handlerAddUser }
-                                initialUserForm={ initialUserForm }
                                 handlerCloseForm={ handlerCloseForm } 
                             />
                         </div>
