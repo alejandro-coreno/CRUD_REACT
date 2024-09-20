@@ -5,8 +5,8 @@ import { UserContext } from "../context/UserContext";
 
 const UsersPage = () => {
 
-   const { visibleForm, handlerOpenForm } = useContext(UserContext);
-    
+    const { visibleForm, handlerOpenForm } = useContext(UserContext);
+
     return (
         <>
             
