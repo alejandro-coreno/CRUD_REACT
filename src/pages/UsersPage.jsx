@@ -1,5 +1,6 @@
 import { UsersList } from "../components/UsersList";
 import { UserModalForm } from "../components/UserModalForm";
+import { useContext } from "react";
 
 const UsersPage = ({ 
     users,
@@ -14,7 +15,7 @@ const UsersPage = ({
     handlerCloseForm
 }) => {
 
-   
+   const {} = useContext();
     
     return (
         <>

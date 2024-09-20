@@ -2,50 +2,40 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar} from "../components/layout/Navbar";
 import { RegisterPage} from "../pages/RegisterPage";
 import { useUsers } from "../hooks/useUsers";
+import { UserProvider } from "../context/UserProvider";
 import UsersPage from "../pages/UsersPage";
 
 // componete que muestra la ruta UserRoutes
 export const UserRoutes = ({login, handlerLogout}) => {
 
-    // obtenemos nuestros metodos y atributos del custom hook
-     const { 
-        users,
-        userSelected, 
-        initialUserForm, 
-        handlerAddUser, 
-        visibleForm,
-
-        handlerRemoveUser, 
-        handlerUserSelectedForm,
-        handlerOpenForm,
-        handlerCloseForm
-    } = useUsers();
-
     return (
         <>  
-            <Navbar login={login} handlerLogout={handlerLogout} />
+            {/* Importamos nuestro UserProvider el cual contrendra la data correspondiente a los users */}
+            <UserProvider>
+                <Navbar login={login} handlerLogout={handlerLogout} />
 
-            <Routes>
-                <Route path="users" element={ <UsersPage 
-                    users={users}
-                    initialUserForm={initialUserForm}
-                    visibleForm={visibleForm}
-                    handlerAddUser={handlerAddUser}
-                    handlerRemoveUser={handlerRemoveUser}
-                    handlerUserSelectedForm={handlerUserSelectedForm}
-                    handlerOpenForm={handlerOpenForm}
-                    handlerCloseForm={handlerCloseForm}
-                    userSelected={userSelected} />}
-                />
-                <Route path="/users/register" element={
-                    <RegisterPage  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
+                <Routes>
+                    <Route path="users" element={ <UsersPage 
+                        users={users}
+                        initialUserForm={initialUserForm}
+                        visibleForm={visibleForm}
+                        handlerAddUser={handlerAddUser}
+                        handlerRemoveUser={handlerRemoveUser}
+                        handlerUserSelectedForm={handlerUserSelectedForm}
+                        handlerOpenForm={handlerOpenForm}
+                        handlerCloseForm={handlerCloseForm}
+                        userSelected={userSelected} />}
+                    />
+                    <Route path="/users/register" element={
+                        <RegisterPage  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
 
-                {/* Dependiendo de cual sea el id dinamico , se editara */}
-                <Route path="/users/edit/:id" element={
-                    <RegisterPage users={users}  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
+                    {/* Dependiendo de cual sea el id dinamico , se editara */}
+                    <Route path="/users/edit/:id" element={
+                        <RegisterPage users={users}  handlerAddUser={handlerAddUser} initialUserForm={initialUserForm}/>} />
 
-                <Route path="/" element={ <Navigate to="/users" />} />
-            </Routes>
+                    <Route path="/" element={ <Navigate to="/users" />} />
+                </Routes>
+            </UserProvider>
         </>
     );
 }
