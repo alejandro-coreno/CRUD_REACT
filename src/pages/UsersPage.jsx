@@ -5,13 +5,7 @@ import { UserContext } from "../context/UserContext";
 
 const UsersPage = () => {
 
-   const { 
-        users,
-        visibleForm,
-        handlerRemoveUser, 
-        handlerUserSelectedForm,
-        handlerOpenForm,
-    } = useContext(UserContext);
+   const { visibleForm, handlerOpenForm } = useContext(UserContext);
     
     return (
         <>
@@ -42,11 +36,7 @@ const UsersPage = () => {
                             </button>
                         }
 
-                        <UsersList 
-                            users={ users } 
-                            handlerRemoveUser={ handlerRemoveUser }
-                            handlerUserSelectedForm={ handlerUserSelectedForm }
-                        />
+                        <UsersList />
                     </div>
                 </div>
             </div>
