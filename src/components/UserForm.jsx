@@ -65,8 +65,9 @@ export const UserForm = ({ handlerCloseForm, userSelected }) => {
             password: ''
 
         });
-    }, [userSelected])
+    }, [userSelected]);
 
+    
     return (
         <form onSubmit={ onSubmit }>
             <input
