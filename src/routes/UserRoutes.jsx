@@ -1,18 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar} from "../components/layout/Navbar";
 import { RegisterPage} from "../pages/RegisterPage";
-import { useUsers } from "../hooks/useUsers";
 import { UserProvider } from "../context/UserProvider";
 import UsersPage from "../pages/UsersPage";
 
 // componete que muestra la ruta UserRoutes
-export const UserRoutes = ({login, handlerLogout}) => {
+export const UserRoutes = () => {
 
     return (
         <>  
             {/* Importamos nuestro UserProvider el cual contrendra la data correspondiente a los users */}
             <UserProvider>
-                <Navbar login={login} handlerLogout={handlerLogout} />
+                <Navbar />
 
                 <Routes>
                     <Route path="users" element={ <UsersPage /> }/>

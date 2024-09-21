@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../auth/context/AuthContext";
 
 // pasamos por props el objeto login y la funcion de salir 
-export const Navbar = ({ login, handlerLogout }) => {
+export const Navbar = () => {
+
+     
+    // obtenemos la data del AuthProvider del hook useContext
+    const { login, handlerLogout } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">

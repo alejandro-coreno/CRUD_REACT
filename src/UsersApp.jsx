@@ -1,13 +1,14 @@
+import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { LoginPage } from "./auth/pages/LoginPage";
-import { useAuth } from "./auth/hooks/useAuth";
 import { UserRoutes } from "./routes/UserRoutes";
+import { AuthContext } from "./auth/context/AuthContext";
 
 
 export const UsersApp = () => {
 
-    // desestructuramos nuestros atributos y metodos del custom hook
-    const { login, handlerLogout, handlerLogin} = useAuth();
+    // obtenemos la data del login desde el hook context
+    const { login } = useContext(AuthContext);
 
     return (
         <Routes>
@@ -16,10 +17,10 @@ export const UsersApp = () => {
             {
                 login.isAuth 
                 ?  
-                    <Route path="/*" element={ <UserRoutes login={login} handlerLogout={handlerLogout} /> } />
+                    <Route path="/*" element={ <UserRoutes /> } />
                 :
                     <>
-                        <Route path="/login" element={ <LoginPage handlerLogin={handlerLogin} /> } />
+                        <Route path="/login" element={ <LoginPage  /> } />
                         <Route path="/*" element={ <Navigate to="/login" />} />
                     </> 
             }

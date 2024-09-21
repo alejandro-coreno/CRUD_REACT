@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
 const initialLoginForm = {
@@ -7,7 +8,10 @@ const initialLoginForm = {
 }
 
 // creamos la pagina de inicio que muestra el login
-export const LoginPage = ({handlerLogin}) => {
+export const LoginPage = () => {
+
+    // obtenemos el metodo handlerLogin del hook useContext
+    const { handlerLogin } = useContext( AuthContext );
 
     const [loginForm, setLoginForm] = useState( initialLoginForm );
 
